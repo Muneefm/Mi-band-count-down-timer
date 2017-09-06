@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="mnf.android.mibandtimer.ScrollingActivity"
+    tools:showIn="@layout/activity_scrolling">
+
+  <!--  <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:text="@string/large_text" />
+-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <!--<TextView
+        android:id="@+id/time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+
+        android:textSize="60sp"
+        android:text="00.59"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/time_tv"
+            android:layout_marginLeft="10dp"
+            android:text="min"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:layout_alignBaseline="@+id/time_tv"
+            />-->
+        <LinearLayout
+            android:id="@+id/minute_container"
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+
+            android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minutes: "
+                    android:id="@+id/min_tv"
+                    android:textColor="@color/grey500"
+                    android:textSize="25dp"
+
+                    />
+            <com.shawnlin.numberpicker.NumberPicker
+                android:id="@+id/min_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:np_width="180dp"
+                app:np_height="64dp"
+                android:layout_marginLeft="50dp"
+                app:np_dividerColor="@color/colorPrimary"
+                app:np_max="59"
+                app:np_min="0"
+                app:np_selectedTextColor="@color/colorPrimary"
+                app:np_selectedTextSize="30dp"
+                app:np_orientation="horizontal"
+
+                app:np_textColor="@color/colorPrimary"
+                app:np_textSize="20dp"
+                app:np_value="3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sec_container"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/minute_container"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seconds: "
+                android:id="@+id/sec_tv"
+                android:textColor="@color/grey500"
+                android:textSize="25dp"
+
+                />
+            <com.shawnlin.numberpicker.NumberPicker
+                android:id="@+id/sec_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:np_width="180dp"
+                app:np_height="64dp"
+                android:layout_marginLeft="50dp"
+                app:np_dividerColor="@color/white"
+                app:np_max="59"
+                app:np_min="0"
+                app:np_selectedTextColor="@color/white"
+                app:np_selectedTextSize="30dp"
+                app:np_orientation="horizontal"
+
+                app:np_textColor="@color/white"
+                app:np_textSize="20dp"
+                app:np_value="3" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>
