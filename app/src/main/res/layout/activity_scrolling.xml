@@ -29,6 +29,33 @@
         android:id="@+id/fakeRl"
 
         android:layout_height="490dp">
+        <TextView
+            android:id="@+id/con_status_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Mi band not connected"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="14dp"
+
+
+            />
+        <TextView
+            android:id="@+id/mac_add_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/con_status_id"
+            android:layout_marginTop="5dp"
+            android:text=""
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="12dp"
+
+
+            />
      <!--   <rjsv.circularview.CircleView
             android:id="@+id/circle_view"
             android:layout_centerVertical="true"
@@ -64,8 +91,10 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             custom:arc_progress="0"
+            custom:arc_text_color="@color/white"
             custom:arc_stroke_width="10dp"
             custom:arc_suffix_text="  sec"
+            custom:arc_unfinished_color="@color/blue400"
             custom:arc_bottom_text_size="20dp"
             custom:arc_bottom_text="TIMER"/>
     </RelativeLayout>
@@ -90,7 +119,7 @@
         android:layout_marginTop="@dimen/fab_margin"
 
         app:layout_anchorGravity="bottom|right|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@android:drawable/ic_media_play" />
 
 
 

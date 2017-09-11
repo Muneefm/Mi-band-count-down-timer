@@ -44,3 +44,4 @@ dependencies {
     compile 'com.android.support:design:26.0.1'
     compile 'com.android.support:support-v13:26.0.1'*/
 }
+apply plugin: 'com.google.gms.google-services'

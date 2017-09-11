@@ -14,7 +14,13 @@
         android:layout_margin="@dimen/text_margin"
         android:text="@string/large_text" />
 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
     <RelativeLayout
+        android:id="@+id/time_pick_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <!--<TextView
@@ -72,7 +78,7 @@
 
                 app:np_textColor="@color/colorPrimary"
                 app:np_textSize="20dp"
-                app:np_value="3" />
+                app:np_value="0" />
         </LinearLayout>
 
         <LinearLayout
@@ -111,6 +117,116 @@
                 app:np_textSize="20dp"
                 app:np_value="3" />
         </LinearLayout>
+
+
+
     </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="50dp"
+            android:id="@+id/button_container"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+
+            android:layout_marginRight="30dp"
+
+            android:layout_height="wrap_content">
+
+
+
+
+            <EditText
+                android:id="@+id/mac_edt"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="0dp"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:hint="Mi-band MAC Address"
+                android:textColorHint="@color/grey500"
+                android:text=""
+
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="61dp" />
+
+
+            <!--
+            btn_listen
+            <Button
+                 android:id="@+id/mi_connect_btn"
+                 android:backgroundTint="@color/red"
+                 android:layout_below="@+id/mac_edt"
+                 android:layout_width="wrap_content"
+                 android:layout_height="45dp"
+                 android:layout_centerHorizontal="true"
+                 android:paddingRight="20dp"
+                 android:textAllCaps="false"
+                 android:textSize="12dp"
+                 android:visibility="visible"
+                 android:paddingLeft="20dp"
+                 android:elevation="10dp"
+                 android:textColor="@color/white"
+                 android:text="Connect"
+                 />-->
+            <Button
+                android:id="@+id/mi_connect_btn"
+                android:backgroundTint="@color/red"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:paddingRight="5dp"
+                android:textAllCaps="false"
+                android:textSize="12dp"
+                android:paddingLeft="5dp"
+                android:layout_toRightOf="@+id/mac_edt"
+                android:elevation="10dp"
+                android:textColor="@color/white"
+                android:text="Connect"
+                android:layout_alignBaseline="@+id/mac_edt"
+                android:layout_alignBottom="@+id/mac_edt"
+                android:layout_marginEnd="19dp" />
+
+
+            <Button
+                android:id="@+id/btn_listen"
+                android:backgroundTint="@color/red"
+                android:layout_below="@+id/mi_connect_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_centerHorizontal="true"
+                android:paddingRight="20dp"
+                android:textAllCaps="false"
+                android:textSize="12dp"
+
+                android:visibility="visible"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="20dp"
+                android:elevation="10dp"
+                android:textColor="@color/white"
+                android:text="Show Intro"
+                />
+
+
+
+            <TextView
+                android:id="@+id/helper_note"
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/btn_listen"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="13dp"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

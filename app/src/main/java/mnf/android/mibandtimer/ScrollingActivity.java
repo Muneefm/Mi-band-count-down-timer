@@ -3,8 +3,12 @@ package mnf.android.mibandtimer;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCharacteristic;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.lzyzsd.circleprogress.ArcProgress;
@@ -28,39 +33,57 @@ import com.shawnlin.numberpicker.NumberPicker;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import mnf.android.mibandtimer.Misc.BLEMiBand2Helper;
 import rjsv.circularview.CircleView;
 import rjsv.circularview.CircleViewAnimation;
 import rjsv.circularview.enumerators.AnimationStyle;
 
-public class ScrollingActivity extends AppCompatActivity {
+public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2Helper.BLEAction
+{
 
     Timer timer;
     ArcProgress ArcProgress;
-    TextView timerView,tvMin,tvSec;
+    TextView timerView,tvMin,tvSec,connStatus,macAddr;
+    EditText edtMac;
     NumberPicker secPicker,minPicker;
     boolean isRunnig = false;
 
+    Handler handler = new Handler(Looper.getMainLooper());
+    static BLEMiBand2Helper helper = null;
+    PreferenceHandler pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
+        helper = new BLEMiBand2Helper(ScrollingActivity.this, handler);
+        helper.addListener(this);
+        pref = new PreferenceHandler(this);
         ArcProgress = (com.github.lzyzsd.circleprogress.ArcProgress) findViewById(R.id.arc_progress);
         secPicker = (NumberPicker) findViewById(R.id.sec_picker);
         minPicker = (NumberPicker) findViewById(R.id.min_picker);
+        connStatus = findViewById(R.id.con_status_id);
         tvMin = findViewById(R.id.min_tv);
         tvSec = findViewById(R.id.sec_tv);
+        macAddr = findViewById(R.id.mac_add_tv);
+        edtMac = findViewById(R.id.mac_edt);
         Typeface face = Typeface.createFromAsset(this.getAssets(), "fonts/Poppins-Regular.ttf");
         tvMin.setTypeface(face);
         tvSec.setTypeface(face);
-
+        connStatus.setTypeface(face);
+        macAddr.setTypeface(face);
+        if(pref.getMacAddress()!=null){
+            macAddr.setText(pref.getMacAddress());
+            edtMac.setText(pref.getMacAddress());
+            connectBand();
+        }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Timer started", Snackbar.LENGTH_LONG)
+                        .setAction("", null).show();
 
 
                Log.e("TAG","time set for "+minPicker.getValue()+" mins "+ secPicker.getValue());
@@ -148,20 +171,25 @@ public class ScrollingActivity extends AppCompatActivity {
                             set.setInterpolator(new DecelerateInterpolator());
                             set.setTarget(donutProgress);
                            set.start();*/
-                        sendMessageToBand();
+                        sendMessageToBand("");
 
                     }
                 });
             }
         }, 0, totalSec);
     }
-    public void sendMessageToBand(){
-
+    public void sendMessageToBand(String msg){
+        helper.sendSms(msg);
     }
-    public void connectMiBand(){
-
+    public void connectBand(){
+        Log.e("MiBand","mi band connection fun");
+        if(helper!=null){
+            Log.e("MiBand"," helper is not null ");
+            helper.connect();
+        }else{
+            Log.e("MiBand"," helper is  null ");
+        }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -184,4 +212,35 @@ public class ScrollingActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onDisconnect() {
+        Log.e("MiBand","onDisconnect ");
+        if(connStatus != null){
+            connStatus.setText(R.string.band_not_connected);
+        }
+    }
+
+    @Override
+    public void onConnect() {
+        Log.e("MiBand","onConnect ");
+        if(connStatus != null){
+            connStatus.setText(R.string.band_connected);
+        }
+
+    }
+
+    @Override
+    public void onRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+
+    }
+
+    @Override
+    public void onWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+
+    }
+
+    @Override
+    public void onNotification(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
+
+    }
 }

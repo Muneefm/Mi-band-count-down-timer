@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
-import mnf.android.miband.ApplicationController;
 import mnf.android.mibandtimer.AppController;
 import mnf.android.mibandtimer.PreferenceHandler;
 

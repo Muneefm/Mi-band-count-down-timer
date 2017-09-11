@@ -59,9 +59,10 @@ public class LaunchActivity extends MaterialIntroActivity {
                 });
 
         addSlide(new SlideFragmentBuilder()
-                        .backgroundColor(R.color.red500)
-                        .buttonsColor(R.color.redDark)
+                        .backgroundColor(R.color.cyan500)
+                        .buttonsColor(R.color.cyan900)
                         .image(R.drawable.intro)
+
                         .title("Count down for Mi band 2! \n")
                         .description(getString(R.string.launch_string_one))
                         .build());

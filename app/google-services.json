@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "212474012784",
+    "firebase_url": "https://mi-band-timer.firebaseio.com",
+    "project_id": "mi-band-timer",
+    "storage_bucket": "mi-band-timer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212474012784:android:7d95ec9280dee6e6",
+        "android_client_info": {
+          "package_name": "mnf.android.mibandtimer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212474012784-cnn2ee2cg1vksujtutib28nsdg0fgh1s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0v3UcoovYSc2roYuLXJ9GdN1zEA5-kkQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -91,4 +91,6 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="launch_string_one">Every second is important. keep track of your  \n time using countdown for Mi band</string>
+    <string name="band_not_connected">Mi-band not connected</string>
+    <string name="band_connected">Mi-band connected</string>
 </resources>
