@@ -23,6 +23,8 @@ public class PreferenceHandler {
 
     final String mac_address = "mac_address_timer";
 
+    final String isPremiumUser="is_user_premium_timer";
+
 
     @SuppressLint("CommitPrefEdits")
     public PreferenceHandler(Context context) {
@@ -57,6 +59,16 @@ public class PreferenceHandler {
 
     public Boolean getFirstTimeUser(){
         return pref.getBoolean(first_time_user, true);
+    }
+
+
+    public void setUserPaidOrNot(boolean var){
+        Log.e("TAG","setUserPaid Set"+var );
+        editor.putBoolean(isPremiumUser, var);
+        editor.commit();
+    }
+    public boolean getUserPaidOrNot(){
+        return pref.getBoolean(isPremiumUser, false);
     }
 
 

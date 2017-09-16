@@ -13,6 +13,23 @@
     android:layout_height="match_parent"
 
     tools:context=".ScrollingActivity">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:fitsSystemWindows="true"
+        >
+
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
     <developer.shivam.library.DiagonalView android:id="@+id/diagonal_view"
         android:layout_width="match_parent"
         android:layout_height="500dp"
@@ -20,6 +37,8 @@
         diagonal:diagonalColor="@color/blue_grey900"
         diagonal:backgroundColor="@color/ActionBarColorBlue"
         diagonal:diagonalGravity="right"
+        app:layout_collapseMode="pin"
+
         diagonal:angle="15">
 
 
@@ -27,7 +46,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/fakeRl"
-
         android:layout_height="490dp">
         <TextView
             android:id="@+id/con_status_id"
@@ -99,6 +117,8 @@
             custom:arc_bottom_text="TIMER"/>
     </RelativeLayout>
 
+    </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
     <!-- <ImageView
          android:layout_width="match_parent"
          android:layout_height="match_parent"
@@ -106,6 +126,8 @@
 
          android:src="@mipmap/cv"
          /> -->
+    <include
+        layout="@layout/content_scrolling"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -123,7 +145,7 @@
 
 
 
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_marginTop="520dp"
         android:layout_marginLeft="20dp"
@@ -131,7 +153,7 @@
         android:layout_height="wrap_content">
         <include layout="@layout/content_scrolling"/>
 
-        <!--<TextView
+        &lt;!&ndash;<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
@@ -148,11 +170,11 @@
             android:layout_alignParentRight="true"
             android:text="9.0"
 
-            />-->
+            />&ndash;&gt;
 
 
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 
 </android.support.design.widget.CoordinatorLayout>

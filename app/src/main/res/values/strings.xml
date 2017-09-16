@@ -93,4 +93,8 @@
     <string name="launch_string_one">Every second is important. keep track of your  \n time using countdown for Mi band</string>
     <string name="band_not_connected">Mi-band not connected</string>
     <string name="band_connected">Mi-band connected</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-7269223551241818/7250789663</string>
 </resources>
