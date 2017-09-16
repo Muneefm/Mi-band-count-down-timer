@@ -123,11 +123,17 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
                     }
                 }else{
                     fab.setImageResource(android.R.drawable.ic_media_pause);
+                    if(totalSec!=0)
                     startTimer(totalSec);
+                    else{
+                        Snackbar.make(view, "Select something more than zero. ", Snackbar.LENGTH_LONG)
+                                .setAction("", null).show();
+                    }
                 }
 
             }
         });
+
         if(isRunnig){
             fab.setImageResource(android.R.drawable.ic_media_pause);
         }else{
@@ -252,7 +258,7 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
     public void connectBand(){
         Log.e("MiBand","mi band connection fun");
         if(helper!=null){
-            Log.e("MiBand"," helper is not null ");
+            Log.e("MiBan"," helper is not null ");
             helper.connect();
         }else{
             Log.e("MiBand"," helper is  null ");
