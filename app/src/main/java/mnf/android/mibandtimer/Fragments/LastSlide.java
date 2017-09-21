@@ -32,6 +32,7 @@ public class LastSlide extends SlideFragment {
         Typeface face = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Jaldi-Regular.ttf");
         tvMacTag.setTypeface(face);
         pref = new PreferenceHandler(getContext());
+        edtMac.setText(pref.getMacAddress());
         return view;
     }
 

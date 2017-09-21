@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,9 +25,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.github.lzyzsd.circleprogress.ArcProgress;
@@ -63,6 +68,10 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
     private InterstitialAd mInterstitialAd;
     int cycle = 0;
     BillingProcessor bp;
+    Context c;
+    int premiumCounter = 0;
+    Button btnPro,cntBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +79,8 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
         setContentView(R.layout.activity_scrolling);
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
+        c = this;
+
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
@@ -79,13 +90,15 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
         helper.addListener(this);
         pref = new PreferenceHandler(this);
         ArcProgress = (com.github.lzyzsd.circleprogress.ArcProgress) findViewById(R.id.arc_progress);
-        secPicker = (NumberPicker) findViewById(R.id.sec_picker);
-        minPicker = (NumberPicker) findViewById(R.id.min_picker);
+        secPicker =  findViewById(R.id.sec_picker);
+        minPicker =  findViewById(R.id.min_picker);
         connStatus = findViewById(R.id.con_status_id);
+        btnPro = findViewById(R.id.pro_btn);
         tvMin = findViewById(R.id.min_tv);
         tvSec = findViewById(R.id.sec_tv);
         macAddr = findViewById(R.id.mac_add_tv);
         edtMac = findViewById(R.id.mac_edt);
+        cntBtn = findViewById(R.id.mi_connect_btn);
         Typeface face = Typeface.createFromAsset(this.getAssets(), "fonts/Poppins-Regular.ttf");
         tvMin.setTypeface(face);
         tvSec.setTypeface(face);
@@ -96,6 +109,30 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
             edtMac.setText(pref.getMacAddress());
             connectBand();
         }
+
+
+        btnPro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //bp.purchase(ScrollingActivity.this, Config.productIdAds);
+            }
+        });
+        cntBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(edtMac.getText()!=null){
+                    if(!edtMac.equals("")){
+                        String macAd = edtMac.getText().toString();
+                        if(pref!=null){
+                            pref.setMacAddress(macAd);
+                        }
+                        connectBand();
+
+                    }
+                }
+            }
+        });
+
 
          fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +158,12 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
                     } else {
                         Log.d("TAG", "The interstitial wasn't loaded yet.");
                     }
+                    premiumCounter++;
+                    if(premiumCounter>Config.PREMIUM_DIALOGUE_LIMIT){
+                        showPremiumDialogue();
+                        premiumCounter = 0;
+                    }
+                    Log.e("TAG", " pemium counter limit = "+premiumCounter);
                 }else{
                     fab.setImageResource(android.R.drawable.ic_media_pause);
                     if(totalSec!=0)
@@ -130,7 +173,6 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
                                 .setAction("", null).show();
                     }
                 }
-
             }
         });
 
@@ -189,38 +231,7 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
             }
         });
 
-     /*   CircleView circleView = (CircleView) findViewById(R.id.circle_view);
-        CircleViewAnimation circleViewAnimation = new CircleViewAnimation(circleView)
-                .setAnimationStyle(AnimationStyle.CONTINUOUS)
-                .setDuration(100)
-                .setCustomAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                        // Animation Starts
-                        Log.e("TAG","on animation start");
-                    }
 
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        // Animation Ends
-                        Log.e("TAG","on animation end");
-
-                    }
-
-                    @Overridewd
-                    public void onAnimationRepeat(Animation animation) {
-                        Log.e("TAG","on animation onAnimationRepeat");
-
-                    }
-                }).setTimerOperationOnFinish(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Run when the duration reaches 0. Regardless of the AnimationLifecycle or main thread.
-                        // Runs and triggers on background.
-                    }
-                })
-                .setCustomInterpolator(new LinearInterpolator());
-        circleView.startAnimation(circleViewAnimation);*/
     }
 
     public void startTimer(final int totalSec){
@@ -254,6 +265,7 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
 
     public void sendMessageToBand(String msg){
         helper.sendSms(msg);
+        //helper.alerta();
     }
     public void connectBand(){
         Log.e("MiBand","mi band connection fun");
@@ -299,6 +311,9 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
         Log.e("MiBand","onConnect ");
         if(connStatus != null){
             connStatus.setText(R.string.band_connected);
+            if(pref!=null){
+                macAddr.setText(pref.getMacAddress());
+            }
         }
 
     }
@@ -323,7 +338,12 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
 
     @Override
     public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
-        Log.e("TAG","onProductPurchased product id = "+productId);
+        Log.e("bill","onProductPurchased product id= "+productId);
+        Log.e("bill","onProductPurchased transation details = "+details.purchaseToken);
+        if(pref!=null){
+            pref.setUserPaidOrNot(true);
+            setProVisibility(pref);
+        }
     }
 
     @Override
@@ -339,6 +359,34 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
 
     @Override
     public void onBillingInitialized() {
+
+    }
+
+    public void showPremiumDialogue() {
+
+        new MaterialDialog.Builder(c)
+                .title(R.string.upgrade_pro)
+                .content(R.string.upgrade_desc)
+                .positiveText(R.string.upgrade)
+                .negativeText(R.string.cancel)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        if(bp!=null){
+                            //bp.purchase(ScrollingActivity.this, Config.productIdAds);
+                        }
+                    }
+                })
+                .icon(c.getResources().getDrawable(R.mipmap.ic_launcher))
+                .show();
+
+
+    }
+
+
+    public void setProVisibility(PreferenceHandler pref){
+
+
 
     }
 }

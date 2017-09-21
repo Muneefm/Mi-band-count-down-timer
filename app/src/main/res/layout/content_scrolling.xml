@@ -192,7 +192,7 @@
 
 
             <Button
-                android:id="@+id/btn_listen"
+                android:id="@+id/pro_btn"
                 android:backgroundTint="@color/red"
                 android:layout_below="@+id/mi_connect_btn"
                 android:layout_width="wrap_content"
@@ -207,7 +207,7 @@
                 android:paddingLeft="20dp"
                 android:elevation="10dp"
                 android:textColor="@color/white"
-                android:text="Show Intro"
+                android:text="Upgrade to PRO"
                 />
 
 

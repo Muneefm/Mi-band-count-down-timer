@@ -46,6 +46,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-ads:11.2.0'
     compile 'com.anjlab.android.iab.v3:library:1.0.+'
+    compile 'com.afollestad.material-dialogs:core:0.9.4.7'
 
 }
 apply plugin: 'com.google.gms.google-services'

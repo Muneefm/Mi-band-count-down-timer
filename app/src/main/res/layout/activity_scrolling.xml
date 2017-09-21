@@ -49,7 +49,7 @@
         android:layout_height="490dp">
         <TextView
             android:id="@+id/con_status_id"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Mi band not connected"
@@ -62,7 +62,7 @@
             />
         <TextView
             android:id="@+id/mac_add_tv"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/con_status_id"
             android:layout_marginTop="5dp"
@@ -71,9 +71,20 @@
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="12dp"
-
-
             />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="PRO user"
+           android:textColor="@color/white"
+           android:paddingRight="10dp"
+           android:paddingLeft="10dp"
+           android:paddingTop="5dp"
+           android:paddingBottom="5dp"
+           android:layout_alignParentRight="true"
+           android:background="@color/red"
+           android:layout_alignParentTop="true"
+           />
      <!--   <rjsv.circularview.CircleView
             android:id="@+id/circle_view"
             android:layout_centerVertical="true"

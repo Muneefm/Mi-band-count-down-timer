@@ -97,4 +97,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="interstitial_ad_unit_id">ca-app-pub-7269223551241818/7250789663</string>
+
+
+    <string name="upgrade_pro">Upgrade to PRO</string>
+    <string name="upgrade_desc">Upgrade to pro and Use the app seamlessly without the interference of any ads</string>
+    <string name="upgrade">Upgrade</string>
+    <string name="cancel">Cancel</string>
+
 </resources>
