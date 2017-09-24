@@ -205,6 +205,8 @@
 
 
     <color name="PrimaryTextColor">#1d3a62</color>
+    <color name="PrimaryTextColorLite">#1d3a42</color>
+
     <color name="SecondaryTextColor">#444444</color>
     <color name="TertiaryTextColor">#FFF</color>
 
@@ -327,6 +329,8 @@
 
 
     <color name="black_20">#33000000</color>
+
+    <color name="blue900">#01579B</color>
 
 
 </resources>

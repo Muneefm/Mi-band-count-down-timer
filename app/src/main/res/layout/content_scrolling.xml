@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:overScrollMode="never"
+    android:fillViewport="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="mnf.android.mibandtimer.ScrollingActivity"
     tools:showIn="@layout/activity_scrolling">
@@ -17,6 +19,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
+
         android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -107,7 +110,7 @@
                 android:layout_marginLeft="50dp"
                 app:np_dividerColor="@color/white"
                 app:np_max="59"
-                app:np_min="0"
+                app:np_min="5"
                 app:np_selectedTextColor="@color/white"
                 app:np_selectedTextSize="30dp"
                 app:np_orientation="horizontal"
@@ -126,6 +129,8 @@
             android:id="@+id/button_container"
             android:layout_width="match_parent"
             android:layout_marginLeft="30dp"
+
+            android:visibility="visible"
             android:gravity="center"
 
             android:layout_marginRight="30dp"
@@ -142,13 +147,11 @@
                 android:layout_width="wrap_content"
                 android:gravity="center"
                 android:textSize="18dp"
-
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:hint="Mi-band MAC Address"
                 android:textColorHint="@color/grey500"
                 android:text=""
-
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="61dp" />
@@ -174,7 +177,7 @@
                  />-->
             <Button
                 android:id="@+id/mi_connect_btn"
-                android:backgroundTint="@color/red"
+                android:backgroundTint="@color/blue_grey700"
                 android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
@@ -193,7 +196,7 @@
 
             <Button
                 android:id="@+id/pro_btn"
-                android:backgroundTint="@color/red"
+                android:backgroundTint="@color/blue_grey700"
                 android:layout_below="@+id/mi_connect_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
@@ -212,27 +215,27 @@
 
 
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/helper_note"
                 android:layout_marginTop="30dp"
                 android:layout_width="wrap_content"
-                android:layout_below="@+id/btn_listen"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="13dp"
-                />
+                />-->
 
         </RelativeLayout>
-        <RelativeLayout
+        <!--<RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
 
         </RelativeLayout>
-
+-->
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

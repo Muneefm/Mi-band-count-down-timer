@@ -70,7 +70,7 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
     BillingProcessor bp;
     Context c;
     int premiumCounter = 0;
-    Button btnPro,cntBtn;
+    Button btnPro,cntBtn,proBtn;
 
 
     @Override
@@ -80,15 +80,21 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
         c = this;
-
+        pref = new PreferenceHandler(this);
+        pref.setFirstTimeUser(false);
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+        if(!pref.getUserPaidOrNot()) {
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            Log.e("TAG","user is not paid ");
+        }else{
+            Log.e("TAG","paid user");
+        }
         bp = new BillingProcessor(this, Config.base64, this);
-
         helper = new BLEMiBand2Helper(ScrollingActivity.this, handler);
         helper.addListener(this);
-        pref = new PreferenceHandler(this);
+
+      //  pref.setUserPaidOrNot(true);
         ArcProgress = (com.github.lzyzsd.circleprogress.ArcProgress) findViewById(R.id.arc_progress);
         secPicker =  findViewById(R.id.sec_picker);
         minPicker =  findViewById(R.id.min_picker);
@@ -99,11 +105,18 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
         macAddr = findViewById(R.id.mac_add_tv);
         edtMac = findViewById(R.id.mac_edt);
         cntBtn = findViewById(R.id.mi_connect_btn);
+        proBtn = findViewById(R.id.btn_pro);
+        if(pref.getUserPaidOrNot()){
+            proBtn.setText("PRO user");
+        }else{
+            proBtn.setText("Remove Ads");
+        }
         Typeface face = Typeface.createFromAsset(this.getAssets(), "fonts/Poppins-Regular.ttf");
         tvMin.setTypeface(face);
         tvSec.setTypeface(face);
         connStatus.setTypeface(face);
         macAddr.setTypeface(face);
+
         if(pref.getMacAddress()!=null){
             macAddr.setText(pref.getMacAddress());
             edtMac.setText(pref.getMacAddress());
@@ -133,8 +146,17 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
             }
         });
 
+        proBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("bill","pro button press");
+                if(!pref.getUserPaidOrNot()){
+                    bp.purchase(ScrollingActivity.this, Config.productIdAds);
+                }
+            }
+        });
 
-         fab = (FloatingActionButton) findViewById(R.id.fab);
+         fab =  findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -153,10 +175,10 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
                     if(timer!=null){
                         timer.cancel();
                     }
-                    if (mInterstitialAd.isLoaded()) {
+                    if (mInterstitialAd.isLoaded()&&!pref.getUserPaidOrNot()) {
                         mInterstitialAd.show();
                     } else {
-                        Log.d("TAG", "The interstitial wasn't loaded yet.");
+                        Log.d("TAG", "The interstitial wasn't loaded yet. or the user is paid");
                     }
                     premiumCounter++;
                     if(premiumCounter>Config.PREMIUM_DIALOGUE_LIMIT){
@@ -186,9 +208,15 @@ public class ScrollingActivity extends AppCompatActivity implements BLEMiBand2He
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                  Log.e("TAG","time set for min "+newVal);
+                 if (newVal==0){
+                     secPicker.setMinValue(5);
+                 }else{
+                     secPicker.setMinValue(0);
+                 }
 
             }
         });
+
         secPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {

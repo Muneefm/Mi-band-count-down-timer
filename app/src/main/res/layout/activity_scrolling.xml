@@ -11,7 +11,7 @@
     android:id="@+id/act_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:fitsSystemWindows="true"
     tools:context=".ScrollingActivity">
 
 
@@ -25,7 +25,7 @@
     <android.support.design.widget.CollapsingToolbarLayout
         android:id="@+id/toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -38,7 +38,6 @@
         diagonal:backgroundColor="@color/ActionBarColorBlue"
         diagonal:diagonalGravity="right"
         app:layout_collapseMode="pin"
-
         diagonal:angle="15">
 
 
@@ -72,7 +71,7 @@
             android:gravity="center"
             android:textSize="12dp"
             />
-       <TextView
+      <!-- <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="PRO user"
@@ -84,33 +83,52 @@
            android:layout_alignParentRight="true"
            android:background="@color/red"
            android:layout_alignParentTop="true"
-           />
-     <!--   <rjsv.circularview.CircleView
-            android:id="@+id/circle_view"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:paddingBottom="60dp"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            circleview:suffixEnabled="true"
-            circleview:suffixValue="Min"
-            circleview:arcBorderColor="@color/color_arc"
-            circleview:arcColor="@color/color_arc"
-            circleview:arcHasBorder="false"
-            circleview:arcWidth="10dp"
-            circleview:hasIndicator="false"
-            circleview:indicatorColor="@color/white"
-            circleview:indicatorRadius="6"
-            circleview:progressColor="@color/color_progress"
-            circleview:progressMaximumValue="100"
-            circleview:progressMinimumValue="1"
-            circleview:progressStepValue="1"
-            circleview:progressStepAsInteger="false"
-            circleview:progressWidth="10dp"
-            circleview:textColor="@color/white"
-            circleview:textEnabled="true"
-            circleview:textFont="fonts/Roboto-Bold.ttf"
-            circleview:textSize="26sp"/>-->
+           />-->
+        <Button
+            android:id="@+id/btn_pro"
+            android:backgroundTint="@color/blue900"
+            android:layout_below="@+id/mi_connect_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:paddingRight="20dp"
+            android:textAllCaps="false"
+            android:textSize="12dp"
+            android:layout_alignParentRight="true"
+
+            android:visibility="visible"
+            android:layout_marginTop="0dp"
+            android:paddingLeft="20dp"
+            android:elevation="10dp"
+            android:textColor="@color/white"
+            android:text="Remove Ads"
+            />
+
+        <!--   <rjsv.circularview.CircleView
+               android:id="@+id/circle_view"
+               android:layout_centerVertical="true"
+               android:layout_centerHorizontal="true"
+               android:paddingBottom="60dp"
+               android:layout_width="250dp"
+               android:layout_height="250dp"
+               circleview:suffixEnabled="true"
+               circleview:suffixValue="Min"
+               circleview:arcBorderColor="@color/color_arc"
+               circleview:arcColor="@color/color_arc"
+               circleview:arcHasBorder="false"
+               circleview:arcWidth="10dp"
+               circleview:hasIndicator="false"
+               circleview:indicatorColor="@color/white"
+               circleview:indicatorRadius="6"
+               circleview:progressColor="@color/color_progress"
+               circleview:progressMaximumValue="100"
+               circleview:progressMinimumValue="1"
+               circleview:progressStepValue="1"
+               circleview:progressStepAsInteger="false"
+               circleview:progressWidth="10dp"
+               circleview:textColor="@color/white"
+               circleview:textEnabled="true"
+               circleview:textFont="fonts/Roboto-Bold.ttf"
+               circleview:textSize="26sp"/>-->
         <com.github.lzyzsd.circleprogress.ArcProgress
             android:id="@+id/arc_progress"
             android:background="@color/ActionBarColorBlue"
@@ -148,9 +166,7 @@
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
         app:layout_anchor="@id/fakeRl"
-
         android:layout_marginTop="@dimen/fab_margin"
-
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@android:drawable/ic_media_play" />
 

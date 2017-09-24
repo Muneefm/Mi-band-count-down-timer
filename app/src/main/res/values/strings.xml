@@ -103,5 +103,6 @@
     <string name="upgrade_desc">Upgrade to pro and Use the app seamlessly without the interference of any ads</string>
     <string name="upgrade">Upgrade</string>
     <string name="cancel">Cancel</string>
+    <string name="int_ad_id">ca-app-pub-3940256099942544/1033173712</string>
 
 </resources>
